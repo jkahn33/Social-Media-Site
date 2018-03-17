@@ -1,0 +1,17 @@
+body {
+    background-color: #6d1212;
+}
+#welcome {
+    font-family: 'Raleway', sans-serif;
+    font-size: 70px;
+    margin: 75px;
+    color: #ffffff;
+}
+label {
+    font-size: 35px;
+    color: #ffffff;
+}
+#submitLogin{
+    margin-left:75px;
+    margin-right:75px;
+}

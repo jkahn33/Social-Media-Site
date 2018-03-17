@@ -58,6 +58,6 @@
     <!-- configuration of transactional behavior based on annotations -->
     <tx:annotation-driven transaction-manager="theTransactionManager"/>
 
-    <mvc:resources mapping="/resources/**" location="/web/resources/" />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
 
 </beans>
