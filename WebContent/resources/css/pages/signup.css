@@ -1,0 +1,9 @@
+body {
+    background-color: #6d1212;
+}
+#registerHeader {
+    font-family: 'Raleway', sans-serif;
+    font-size: 70px;
+    margin: 75px;
+    color: #ffffff;
+}
