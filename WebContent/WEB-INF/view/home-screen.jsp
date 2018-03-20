@@ -1,16 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Jacob
-  Date: 3/19/2018
-  Time: 1:17 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE  html>
 <html>
 <head>
-    <title>Title</title>
+    <title>Home</title>
 </head>
 <body>
-
+<h1>Welcome ${user.first} ${user.last}!</h1>
 </body>
 </html>

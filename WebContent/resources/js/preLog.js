@@ -18,4 +18,5 @@ function registerUser(){
             console.log("SUCCESS");
         }
     });
+
 }
