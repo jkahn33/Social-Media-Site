@@ -1,9 +1,14 @@
 package main.java.com.jkahn.social.objects;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 @Entity
 @Table (name="\"user\"")
+@Component
+@Scope("session")
 public class User {
 
     @Id

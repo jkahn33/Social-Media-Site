@@ -27,7 +27,7 @@
   </div>
   <button type="submit" class="btn btn-primary">Login</button>
 </form>
-<form id="signUp" action="/signup" method="GET">
+<form id="signUp" action="/homepage" method="GET">
   <button type="submit" class="btn btn-success">Sign up</button>
 </form>
 </body>
