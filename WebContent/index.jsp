@@ -20,14 +20,14 @@
 </head>
 <body>
 <h1 id="welcome" align="center">Welcome to Jacob's Social Media Site</h1>
-<form id="submitLogin" action="/login" method="POST">
+<form id="submitLogin" action="/login/login" method="POST">
   <div class="form-group">
     <label for="uEmail" style="font-size:35px;">Email</label>
     <input type="email" class="form-control" id="uEmail" placeholder="Enter email"/>
   </div>
   <button type="submit" class="btn btn-primary">Login</button>
 </form>
-<form id="signUp" action="/signup" method="GET">
+<form id="signUp" action="/login/signup" method="GET">
   <button type="submit" class="btn btn-success">Sign up</button>
 </form>
 </body>
