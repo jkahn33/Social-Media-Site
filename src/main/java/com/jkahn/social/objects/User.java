@@ -1,9 +1,11 @@
 package main.java.com.jkahn.social.objects;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name="\"user\"")
@@ -13,7 +15,8 @@ public class User {
 
     @Id
     @Column(name="id_user")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GenericGenerator(name="generator", strategy="increment")
+    @GeneratedValue(generator="generator")
     private int id;
 
     @Column(name="first")
@@ -28,6 +31,8 @@ public class User {
     private int day;
     @Column(name="year")
     private int year;
+    @OneToMany(mappedBy = "creator")
+    private List<Status> statuses;
 
     public User(){
 

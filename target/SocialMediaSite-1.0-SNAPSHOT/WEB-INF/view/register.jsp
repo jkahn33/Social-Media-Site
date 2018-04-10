@@ -17,15 +17,15 @@
 </head>
 <body>
 <h1 align="center" id="registerHeader">Register new user</h1>
-<form action="/login/registerUser" method="POST" align="center" style="margin-left:75px; margin-right:75px;" id="submitSignup">
+<form action="/user/registerUser" method="POST" align="center" style="margin-left:75px; margin-right:75px;" id="submitSignup">
     <div align="center" style="color:#ffffff;" class="form-group">
-        First name <input style=" width:335px;" type="text" class="form-control" id="iFirst" placeholder="Enter first name"/>
+        First name <input style=" width:335px;" type="text" class="form-control" name="firstName" id="iFirst" placeholder="Enter first name"/>
     </div>
     <div align="center" style="color:#ffffff;" class="form-group">
-        Last name <input style=" width:335px;" type="text" class="form-control" id="iLast" placeholder="Enter last name"/>
+        Last name <input style=" width:335px;" type="text" class="form-control" name="lastName" id="iLast" placeholder="Enter last name"/>
     </div>
     <div align="center" style="color:#ffffff;" class="form-group">
-        Email <input style=" width:335px;" type="email" class="form-control" id="iEmail" placeholder="Enter email"/>
+        Email <input style=" width:335px;" type="email" class="form-control" name="email" id="iEmail" placeholder="Enter email"/>
     </div>
     <button type="submit" class="btn btn-success">Register!</button>
 </form>
