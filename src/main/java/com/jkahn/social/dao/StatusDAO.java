@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface StatusDAO {
     public void addStatus(Status status);
-    public List<Status> getStatuses();
+    public List<Status> getStatuses(User user);
     public Status getStatus();
     public void updateUser(Status status);
     public void removeUser(Status status);

@@ -1,6 +1,10 @@
 package main.java.com.jkahn.social.objects;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +14,7 @@ import java.util.List;
 @Entity
 @Table (name="\"user\"")
 @Component
+@Indexed
 @Scope("session")
 public class User {
 
@@ -24,6 +29,7 @@ public class User {
     @Column(name="last")
     private String last;
     @Column(name="email")
+    @Field
     private String email;
     @Column(name="month")
     private int month;

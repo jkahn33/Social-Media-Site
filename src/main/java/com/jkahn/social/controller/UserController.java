@@ -1,5 +1,6 @@
 package main.java.com.jkahn.social.controller;
 
+import main.java.com.jkahn.social.objects.HomepageData;
 import main.java.com.jkahn.social.objects.SentStatus;
 import main.java.com.jkahn.social.objects.Status;
 import main.java.com.jkahn.social.objects.User;
@@ -40,6 +41,19 @@ public class UserController {
         return "index";
     }
 
+    @PostMapping("/login")
+    public void login(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException{
+        String email = req.getParameter("email");
+        log.info("email");
+        User theUser = userService.getUserByEmail(email);
+
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session= attr.getRequest().getSession(true);
+        session.setAttribute("user", theUser);
+
+        res.sendRedirect("/user/homepage");
+    }
+
     @RequestMapping(value="/signup", method= RequestMethod.GET)
     public ModelAndView signup(){
         return new ModelAndView("register");
@@ -48,10 +62,15 @@ public class UserController {
     @PostMapping(value = "/registerUser")
     public void register(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws java.io.IOException{
         Calendar c = Calendar.getInstance();
-        User newUser = new User((String)req.getParameter("firstName"), (String)req.getParameter("lastName"), (String)req.getParameter("email"), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
-        userService.addUser(newUser);
-        session.setAttribute("user", newUser);
-        res.sendRedirect("/user/homepage");
+        if(userService.getUserByEmail("email") == null) {
+            User newUser = new User((String) req.getParameter("firstName"), (String) req.getParameter("lastName"), (String) req.getParameter("email"), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
+            userService.addUser(newUser);
+            session.setAttribute("user", newUser);
+            res.sendRedirect("/user/homepage");
+        }
+        else{
+            res.
+        }
     }
 
     @RequestMapping(value="/homepage", method=RequestMethod.GET)
@@ -60,7 +79,10 @@ public class UserController {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session= attr.getRequest().getSession(true);
         User currentUser = (User) session.getAttribute("user");
-        theModel.addAttribute("user", currentUser);
+        List<Status> statuses = statusService.getStatuses(currentUser);
+
+        HomepageData data = new HomepageData(statuses, currentUser);
+        theModel.addAttribute("data", data);
         returnObj.addObject(theModel);
         return returnObj;
     }

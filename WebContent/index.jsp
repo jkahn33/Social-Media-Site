@@ -23,7 +23,7 @@
 <form id="submitLogin" action="/user/login" method="POST">
   <div class="form-group">
     <label for="uEmail" style="font-size:35px;">Email</label>
-    <input type="email" class="form-control" id="uEmail" placeholder="Enter email"/>
+    <input type="email" class="form-control" id="uEmail" name="email" placeholder="Enter email"/>
   </div>
   <button type="submit" class="btn btn-primary">Login</button>
 </form>
