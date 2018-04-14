@@ -1,9 +1,6 @@
 package main.java.com.jkahn.social.controller;
 
-import main.java.com.jkahn.social.objects.HomepageData;
-import main.java.com.jkahn.social.objects.SentStatus;
-import main.java.com.jkahn.social.objects.Status;
-import main.java.com.jkahn.social.objects.User;
+import main.java.com.jkahn.social.objects.*;
 import main.java.com.jkahn.social.service.StatusService;
 import main.java.com.jkahn.social.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +42,7 @@ public class UserController {
     public void login(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException{
         String email = req.getParameter("email");
         log.info("email");
-        User theUser = userService.getUserByEmail(email);
+        User theUser = userService.getUserByEmail(email).get(0);
 
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session= attr.getRequest().getSession(true);
@@ -55,21 +52,36 @@ public class UserController {
     }
 
     @RequestMapping(value="/signup", method= RequestMethod.GET)
-    public ModelAndView signup(){
-        return new ModelAndView("register");
+    public ModelAndView signup(Model theModel){
+        ModelAndView returnObj = new ModelAndView("register");
+        RegisterCheck rc = new RegisterCheck(true);
+        theModel.addAttribute("check", rc);
+        returnObj.addObject(theModel);
+        return returnObj;
     }
 
     @PostMapping(value = "/registerUser")
-    public void register(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws java.io.IOException{
+    public ModelAndView register(HttpServletRequest req, HttpServletResponse res, HttpSession session, Model theModel) throws java.io.IOException{
         Calendar c = Calendar.getInstance();
-        if(userService.getUserByEmail("email") == null) {
-            User newUser = new User((String) req.getParameter("firstName"), (String) req.getParameter("lastName"), (String) req.getParameter("email"), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
+        List<User> userList = userService.getUserByEmail(req.getParameter("email"));
+        if(userList.size() == 0) {
+            int month = c.get(Calendar.MONTH) + 1;
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            int year = c.get(Calendar.YEAR);
+
+            User newUser = new User((String) req.getParameter("firstName"), (String) req.getParameter("lastName"), (String) req.getParameter("email"), month, day, year, (month+day+year));
             userService.addUser(newUser);
+
             session.setAttribute("user", newUser);
             res.sendRedirect("/user/homepage");
+            return null;
         }
         else{
-            res.
+            ModelAndView returnObj = new ModelAndView("register");
+            RegisterCheck rc = new RegisterCheck(false);
+            theModel.addAttribute("check", rc);
+            returnObj.addObject(theModel);
+            return returnObj;
         }
     }
 

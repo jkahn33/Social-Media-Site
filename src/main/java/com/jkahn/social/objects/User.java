@@ -37,6 +37,8 @@ public class User {
     private int day;
     @Column(name="year")
     private int year;
+    @Column
+    private int totalDate;
     @OneToMany(mappedBy = "creator")
     private List<Status> statuses;
 
@@ -44,13 +46,14 @@ public class User {
 
     }
 
-    public User(String first, String last, String email, int month, int day, int year){
+    public User(String first, String last, String email, int month, int day, int year, int totalDate){
         this.first = first;
         this.last = last;
         this.email = email;
         this.month = month;
         this.day = day;
         this.year = year;
+        this.totalDate = totalDate;
     }
 
     public String getFirst() {
@@ -75,5 +78,9 @@ public class User {
 
     public int getYear() {
         return year;
+    }
+
+    public int getTotalDate(){
+        return totalDate;
     }
 }

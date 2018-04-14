@@ -33,7 +33,7 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public List<User> getUserByEmail(String email) {
         //create the entity manager from the session factory
         EntityManager em = sessionFactory.createEntityManager();
         FullTextEntityManager fullTextEntityManager = org.hibernate.search.jpa.Search.getFullTextEntityManager(em);
@@ -48,13 +48,7 @@ public class UserDAOImpl implements UserDAO{
         em.getTransaction().commit();
         em.close();
 
-        if(result.size() == 0 || result.size() > 1){
-            log.info("inside 1 or 0");
-            return null;
-        }
-        else{
-            return (User) result.get(0);
-        }
+        return result;
     }
 
     @Override
