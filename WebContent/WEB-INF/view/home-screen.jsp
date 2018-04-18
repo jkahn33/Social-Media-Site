@@ -8,6 +8,9 @@
     <title>Home</title>
 </head>
 <body>
-<h1>Welcome ${user.first} ${user.last}!</h1>
+<h1>Welcome ${data.user.first} ${data.user.last}!</h1>
+<form action="/user/writeStatus" method="POST">
+    <input type="text" name="text"><button type="submit">Submit</button>
+</form>
 </body>
 </html>
