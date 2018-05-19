@@ -44,9 +44,9 @@ public class User {
     @ManyToMany
     @JoinTable(name="friends", joinColumns=@JoinColumn(name="current_id"), inverseJoinColumns=@JoinColumn(name="friend_id"))
     private List<User> friends;
-    @ManyToMany
-    @JoinTable(name="friends", joinColumns=@JoinColumn(name="friend_id"), inverseJoinColumns=@JoinColumn(name="current_id"))
-    private List<User> friendOf;
+//    @ManyToMany
+//    @JoinTable(name="friends", joinColumns=@JoinColumn(name="friend_id"), inverseJoinColumns=@JoinColumn(name="current_id"))
+//    private List<User> friendOf;
 
     public User(){
 
@@ -91,5 +91,9 @@ public class User {
 
     public int getTotalDate(){
         return totalDate;
+    }
+
+    public void addFriend(User friend){
+        friends.add(friend);
     }
 }

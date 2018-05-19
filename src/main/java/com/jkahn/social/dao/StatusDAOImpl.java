@@ -40,6 +40,11 @@ public class StatusDAOImpl implements StatusDAO {
     }
 
     @Override
+    public void addFriend(User friend){
+
+    }
+
+    @Override
     public void removeUser(Status status) {
 
     }

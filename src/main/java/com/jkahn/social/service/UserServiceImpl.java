@@ -32,4 +32,10 @@ public class UserServiceImpl implements UserService {
 
         return result;
     }
+
+    @Override
+    @Transactional
+    public void addFriend(User friend){
+
+    }
 }

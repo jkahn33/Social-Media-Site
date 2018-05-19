@@ -9,5 +9,6 @@ public interface StatusDAO {
     public void addStatus(Status status);
     public List<Status> getStatuses(User user);
     public void updateUser(Status status);
+    public void addFriend(User friend);
     public void removeUser(Status status);
 }

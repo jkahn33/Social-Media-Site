@@ -37,7 +37,6 @@ public class UserDAOImpl implements UserDAO{
         //create the entity manager from the session factory
         EntityManager em = sessionFactory.createEntityManager();
         FullTextEntityManager fullTextEntityManager = org.hibernate.search.jpa.Search.getFullTextEntityManager(em);
-        em.getTransaction().begin();
 
         QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(User.class).get();
         org.apache.lucene.search.Query luceneQuery = qb.keyword().onFields("email").matching(email).createQuery();
@@ -45,20 +44,16 @@ public class UserDAOImpl implements UserDAO{
 
         List result = jpaQuery.getResultList();
 
-        em.getTransaction().commit();
-        em.close();
-        if(em.getTransaction().isActive()){
-            log.severe("TRANSACTION ACTIVE");
-        }
-        else{
-            log.info("not active");
-        }
-
         return result;
     }
 
     @Override
-    public void updateUser(User user) {
+    public void addFriend(int currentId, int friendId) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        User currentUser = currentSession.get(User.class, currentId);
+        User userToFriend = currentSession.get(User.class, friendId);
+
+        currentUser.addFriend(userToFriend);
 
     }
 
