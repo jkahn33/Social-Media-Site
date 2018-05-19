@@ -47,6 +47,12 @@ public class UserDAOImpl implements UserDAO{
 
         em.getTransaction().commit();
         em.close();
+        if(em.getTransaction().isActive()){
+            log.severe("TRANSACTION ACTIVE");
+        }
+        else{
+            log.info("not active");
+        }
 
         return result;
     }

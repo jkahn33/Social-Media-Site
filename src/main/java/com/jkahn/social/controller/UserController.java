@@ -3,6 +3,7 @@ package main.java.com.jkahn.social.controller;
 import main.java.com.jkahn.social.objects.*;
 import main.java.com.jkahn.social.service.StatusService;
 import main.java.com.jkahn.social.service.UserService;
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Scope;
@@ -99,7 +100,7 @@ public class UserController {
         return returnObj;
     }
     @PostMapping("/writeStatus")
-    public void writeStatus(HttpServletRequest req){
+    public void writeStatus(HttpServletRequest req, HttpServletResponse res) throws java.io.IOException{
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session= attr.getRequest().getSession(true);
         User currentUser = (User) session.getAttribute("user");
@@ -112,5 +113,17 @@ public class UserController {
 
         statusService.addStatus(status);
 
+        res.sendRedirect("/user/homepage");
+
+    }
+    @GetMapping("/testStatuses")
+    public void testStatuses(){
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session= attr.getRequest().getSession(true);
+        User currentUser = (User) session.getAttribute("user");
+        List<Status> statuses = statusService.getStatuses(currentUser);
+        for(Status s : statuses){
+            log.info(s.getText());
+        }
     }
 }

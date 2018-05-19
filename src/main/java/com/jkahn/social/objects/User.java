@@ -41,6 +41,12 @@ public class User {
     private int totalDate;
     @OneToMany(mappedBy = "creator")
     private List<Status> statuses;
+    @ManyToMany
+    @JoinTable(name="friends", joinColumns=@JoinColumn(name="current_id"), inverseJoinColumns=@JoinColumn(name="friend_id"))
+    private List<User> friends;
+    @ManyToMany
+    @JoinTable(name="friends", joinColumns=@JoinColumn(name="friend_id"), inverseJoinColumns=@JoinColumn(name="current_id"))
+    private List<User> friendOf;
 
     public User(){
 
@@ -56,6 +62,9 @@ public class User {
         this.totalDate = totalDate;
     }
 
+    public int getId(){
+        return id;
+    }
     public String getFirst() {
         return first;
     }

@@ -26,15 +26,12 @@ public class StatusDAOImpl implements StatusDAO {
 
     @Override
     public List<Status> getStatuses(User user) {
+        int creator_id = user.getId();
+        log.info("ID: " + creator_id);
         Session currentSession = sessionFactory.getCurrentSession();
-        Query<Status> theQuery = currentSession.createQuery("from Status where creatorId = 6");
+        Query<Status> theQuery = currentSession.createQuery("from Status where creatorId = " + creator_id);
         List<Status> statuses = theQuery.getResultList();
         return statuses;
-    }
-
-    @Override
-    public Status getStatus() {
-        return null;
     }
 
     @Override

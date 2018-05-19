@@ -12,5 +12,8 @@
 <form action="/user/writeStatus" method="POST">
     <input type="text" name="text"><button type="submit">Submit</button>
 </form>
+<form action="/user/testStatuses" method="GET">
+    <button type="submit">Test</button>
+</form>
 </body>
 </html>
