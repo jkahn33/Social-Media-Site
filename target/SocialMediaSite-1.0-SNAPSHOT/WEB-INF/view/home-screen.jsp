@@ -12,7 +12,7 @@
 <form action="/user/writeStatus" method="POST">
     <input type="text" name="text"><button type="submit">Submit</button>
 </form>
-<form action="/user/testStatuses" method="GET">
+<form action="/user/checkFriends" method="GET">
     <button type="submit">Test</button>
 </form>
 </body>

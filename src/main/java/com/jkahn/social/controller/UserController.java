@@ -126,4 +126,25 @@ public class UserController {
             log.info(s.getText());
         }
     }
+    @GetMapping("/testFriend")
+    public void addFriend(){
+        int friendId = 4;
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session= attr.getRequest().getSession(true);
+        User currentUser = (User) session.getAttribute("user");
+
+        User friend = userService.getUserById(friendId);
+        userService.addFriend(currentUser, friend);
+    }
+    @GetMapping("/checkFriends")
+    public void checkUsers(){
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session= attr.getRequest().getSession(true);
+        User currentUser = (User) session.getAttribute("user");
+        List<User> users = currentUser.getFriends();
+
+        for(User u : users){
+            log.info("FRIEND: " + u.getFirst() + " " + u.getLast());
+        }
+    }
 }

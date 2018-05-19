@@ -35,7 +35,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addFriend(User friend){
+    public void addFriend(User current, User friend){
+        userDAO.addFriend(current.getId(), friend.getId());
+        userDAO.addFriend(friend.getId(), current.getId());
+    }
 
+    @Override
+    @Transactional
+    public User getUserById(int id){
+        User user = userDAO.getUserById(id);
+
+        return user;
     }
 }

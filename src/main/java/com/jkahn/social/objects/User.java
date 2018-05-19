@@ -96,4 +96,8 @@ public class User {
     public void addFriend(User friend){
         friends.add(friend);
     }
+
+    public List<User> getFriends(){
+        return friends;
+    }
 }
