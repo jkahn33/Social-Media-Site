@@ -27,14 +27,17 @@ public class Status {
     private int year;
     @Column(name="day_of_week")
     private String dayOfWeek;
+    @Column(name="totaldate")
+    private int totalDate;
 
-    public Status(String text, User creator, int month, int day, int year, String dayOfWeek){
+    public Status(String text, User creator, int month, int day, int year, String dayOfWeek, int totalDate){
         this.text = text;
         this.creator = creator;
         this.month = month;
         this.day = day;
         this.year = year;
         this.dayOfWeek = dayOfWeek;
+        this.totalDate = totalDate;
     }
     public Status(){
 
@@ -66,5 +69,9 @@ public class Status {
 
     public String getDayOfWeek() {
         return dayOfWeek;
+    }
+
+    public int getTotalDate(){
+        return totalDate;
     }
 }

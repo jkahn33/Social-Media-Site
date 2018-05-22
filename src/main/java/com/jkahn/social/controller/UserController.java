@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -109,7 +110,13 @@ public class UserController {
         Date date = new Date();
         SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE");
 
-        Status status = new Status((String) req.getParameter("text"), currentUser, c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR), simpleDateformat.format(date));
+        int month = c.get(Calendar.MONTH) + 1;
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int year = c.get(Calendar.YEAR);
+
+        String time = LocalDateTime.now().toString();
+
+        Status status = new Status((String) req.getParameter("text"), currentUser, c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR), simpleDateformat.format(date), 2);
 
         statusService.addStatus(status);
 
