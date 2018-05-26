@@ -18,7 +18,7 @@
 </form>
 <%for(Status s : theData.getStatuses()){ %>
 <%=s.getText()%>
-<%%>
+<%}%>
 
 <form action="/user/checkFriends" method="GET">
     <button type="submit">Test</button>
