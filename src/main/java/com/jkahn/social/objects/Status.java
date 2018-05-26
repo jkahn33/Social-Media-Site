@@ -17,7 +17,7 @@ public class Status {
     private String text;
 
     @ManyToOne
-    @JoinColumn(name="creatorId", nullable=false)
+    @JoinColumn(name="creatorid", nullable=false)
     private User creator;
     @Column(name="month")
     private int month;

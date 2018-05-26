@@ -135,7 +135,7 @@ public class UserController {
     }
     @GetMapping("/testFriend")
     public void addFriend(){
-        int friendId = 4;
+        int friendId = 2;
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session= attr.getRequest().getSession(true);
         User currentUser = (User) session.getAttribute("user");
