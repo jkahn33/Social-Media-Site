@@ -4,6 +4,7 @@ import main.java.com.jkahn.social.objects.*;
 import main.java.com.jkahn.social.service.StatusService;
 import main.java.com.jkahn.social.service.UserService;
 import org.apache.http.protocol.HTTP;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Scope;
@@ -20,7 +21,6 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -106,18 +106,18 @@ public class UserController {
         HttpSession session= attr.getRequest().getSession(true);
         User currentUser = (User) session.getAttribute("user");
 
-        Calendar c = Calendar.getInstance();
-        Date date = new Date();
-        SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE");
+        DateTime dt = new DateTime();
 
-        int month = c.get(Calendar.MONTH) + 1;
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        int year = c.get(Calendar.YEAR);
+        int month = dt.getMonthOfYear();
+        int day = dt.getDayOfMonth();
+        int year = dt.getYear();
+        String dayOfWeek = dt.dayOfWeek().getAsText();
 
-        String time = LocalDateTime.now().toString();
+        int time = dt.getMinuteOfDay();
 
-        Status status = new Status((String) req.getParameter("text"), currentUser, c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR), simpleDateformat.format(date), 2);
+        int totalDate = month+day+year+time;
 
+        Status status = new Status((String) req.getParameter("text"), currentUser, month, day, year, dayOfWeek, totalDate);
         statusService.addStatus(status);
 
         res.sendRedirect("/user/homepage");
@@ -135,7 +135,7 @@ public class UserController {
     }
     @GetMapping("/testFriend")
     public void addFriend(){
-        int friendId = 2;
+        int friendId = 3;
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session= attr.getRequest().getSession(true);
         User currentUser = (User) session.getAttribute("user");

@@ -20,7 +20,7 @@
 <%=s.getText()%>
 <%}%>
 
-<form action="/user/checkFriends" method="GET">
+<form action="/user/testFriend" method="GET">
     <button type="submit">Test</button>
 </form>
 </body>
